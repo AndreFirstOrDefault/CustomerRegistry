@@ -15,7 +15,7 @@ public sealed class Customer
 
     public Customer(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
     {
-        ValidateDomain(name,phoneNumber,email,isActive,lastPaymentDate);        
+        ValidateDomain(name, phoneNumber, email, isActive, lastPaymentDate);
     }
 
     public void Update(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
@@ -32,7 +32,7 @@ public sealed class Customer
     {
         ValidateDomain(id, name, phoneNumber, email, isActive, lastPaymentDate);
         
-    }    
+    }
 
     private void ValidateDomain(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
     {
@@ -58,7 +58,7 @@ public sealed class Customer
 
     private void ValidateDomain(int id,string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
     {
-        DomainExceptionValidation.When(id <= 0, "Invalid ID");
+        DomainExceptionValidation.When(id <= 0, "Invalid Id value.");
         CustomerId = id;
 
         DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Invalid name. Name is required");
@@ -75,7 +75,7 @@ public sealed class Customer
 
         IsActive = isActive;
 
-        DomainExceptionValidation.When(lastPaymentDate > DateTime.Now, "The date of the last payment cannot be greater than the current date.");
+        DomainExceptionValidation.When(lastPaymentDate > DateTime.Now, "Invalid date. The date of the last payment cannot be greater than the current date.");
         LastPaymentDate = lastPaymentDate;
 
         NextPaymentDate = lastPaymentDate.AddMonths(1);
