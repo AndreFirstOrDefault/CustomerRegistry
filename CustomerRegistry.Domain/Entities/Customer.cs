@@ -1,4 +1,5 @@
-﻿using CustomerRegistry.Domain.Validation;
+﻿using CustomerRegistry.Domain.Enums;
+using CustomerRegistry.Domain.Validation;
 
 namespace CustomerRegistry.Domain.Entities;
 
@@ -10,31 +11,35 @@ public sealed class Customer
     public string? PhoneNumber { get; private set; }
     public string? Email { get; private set; } 
     public bool IsActive { get; private set; }
+    public string? Plan { get; private set; }
+    public SubscriptionPlan SubscriPlan { get; private set; }
     public DateTime LastPaymentDate { get; private set; }
     public DateTime NextPaymentDate { get; private set; }
 
-    public Customer(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
+    public Customer(string name, string phoneNumber, string email, bool isActive, string plan, DateTime lastPaymentDate)
     {
-        ValidateDomain(name, phoneNumber, email, isActive, lastPaymentDate);
+        ValidateDomain(name, phoneNumber, email, isActive,plan, lastPaymentDate);
     }
 
-    public void Update(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
+    public void Update(string name, string phoneNumber, string email, bool isActive, string plan,DateTime lastPaymentDate)
     {
         Name = name; 
         PhoneNumber = phoneNumber; 
         Email = email; 
-        IsActive = isActive; 
+        IsActive = isActive;
+        Plan = plan;
         LastPaymentDate = lastPaymentDate;
-    }
-
-    // 2° passo, o construtor com id foi criado apenas para popular a tabela
-    public Customer(int id, string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
-    {
-        ValidateDomain(id, name, phoneNumber, email, isActive, lastPaymentDate);
         
     }
 
-    private void ValidateDomain(string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
+    // 2° passo, o construtor com id foi criado apenas para popular a tabela
+    public Customer(int id, string name, string phoneNumber, string email, bool isActive, string plan,DateTime lastPaymentDate)
+    {
+        ValidateDomain(id, name, phoneNumber, email, isActive, plan, lastPaymentDate);
+        
+    }
+
+    private void ValidateDomain(string name, string phoneNumber, string email, bool isActive, string plan, DateTime lastPaymentDate)
     {
         DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Invalid name. Name is required");
         DomainExceptionValidation.When(name.Length < 3, "Invalid name, too short, minimum 3 characters");
@@ -50,13 +55,17 @@ public sealed class Customer
 
         IsActive = isActive;
 
+        DomainExceptionValidation.When(string.IsNullOrEmpty(plan), "Invalid plan. The plan is required.");
+        DomainExceptionValidation.When(plan != "Monthly" && plan != "Bimonthly" && plan != "Quarterly" && plan != "Semiannual" && plan != "Annual", "Invalid plan, this plan does not exist at the moment.");
+        SubscriPlan = Enum.Parse<SubscriptionPlan>(plan);
+
         DomainExceptionValidation.When(lastPaymentDate > DateTime.Now, "The date of the last payment cannot be greater than the current date.");
         LastPaymentDate = lastPaymentDate;
 
         NextPaymentDate = lastPaymentDate.AddMonths(1);
     }
 
-    private void ValidateDomain(int id,string name, string phoneNumber, string email, bool isActive, DateTime lastPaymentDate)
+    private void ValidateDomain(int id,string name, string phoneNumber, string email, bool isActive, string plan, DateTime lastPaymentDate)
     {
         DomainExceptionValidation.When(id <= 0, "Invalid Id value.");
         CustomerId = id;
@@ -77,6 +86,10 @@ public sealed class Customer
 
         DomainExceptionValidation.When(lastPaymentDate > DateTime.Now, "Invalid date. The date of the last payment cannot be greater than the current date.");
         LastPaymentDate = lastPaymentDate;
+
+        DomainExceptionValidation.When(string.IsNullOrEmpty(plan), "Invalid plan. The plan is required.");
+        DomainExceptionValidation.When(plan != "Monthly" && plan != "Bimonthly" && plan != "Quarterly" && plan != "Semiannual" && plan != "Annual", "Invalid plan, this plan does not exist at the moment.");
+        SubscriPlan = Enum.Parse<SubscriptionPlan>(plan);
 
         NextPaymentDate = lastPaymentDate.AddMonths(1);
     }
