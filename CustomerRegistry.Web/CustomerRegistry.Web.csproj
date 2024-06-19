@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CustomerRegistry.Infrastructure\CustomerRegistry.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

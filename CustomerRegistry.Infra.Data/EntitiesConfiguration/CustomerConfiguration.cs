@@ -24,6 +24,6 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             new Customer(4, "Daniela", "(31)9988-7766", "daniela@gmail.com", true, "Monthly", 25m, DateTime.Now.AddMonths(-2)),
             new Customer(5, "Eduardo", "(41)9234-5678", "eduardo@gmail.com", false, "Annual", 150m, DateTime.Now.AddMonths(-3))
 
-            );
+        );
     }
 }

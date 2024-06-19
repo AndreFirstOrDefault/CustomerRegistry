@@ -1,7 +1,15 @@
+using CustomerRegistry.Domain.Interfaces;
+using CustomerRegistry.Infra.Data.Repositories;
+using CustomerRegistry.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
 
 var app = builder.Build();
 

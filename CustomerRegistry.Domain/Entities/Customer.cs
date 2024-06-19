@@ -22,7 +22,7 @@ public sealed class Customer
         ValidateDomain(name, phoneNumber, email, isActive,plan, planPrice,lastPaymentDate);
     }
 
-    public void Update(string name, string phoneNumber, string email, bool isActive, string plan,decimal planPrice, DateTime lastPaymentDate)
+    public void Update(string? name, string phoneNumber, string email, bool isActive, string plan,decimal planPrice, DateTime lastPaymentDate)
     {
         Name = name; 
         PhoneNumber = phoneNumber; 
