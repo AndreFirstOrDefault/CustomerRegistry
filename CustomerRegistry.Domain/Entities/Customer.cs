@@ -66,28 +66,34 @@ public sealed class Customer
         DomainExceptionValidation.When(string.IsNullOrEmpty(plan), "Invalid plan. The plan is required.");
         DomainExceptionValidation.When(plan != "Monthly" && plan != "Bimonthly" && plan != "Quarterly" && plan != "Semiannual" && plan != "Annual", "Invalid plan, this plan does not exist at the moment.");
         SubscriPlan = Enum.Parse<SubscriptionPlan>(plan);
+        Plan = plan;
 
         int months = 0;
 
-        if (plan == "Monthly")
+        if (isActive)
         {
-            months = 1;
-        }
-        else if (plan == "Bimonthly")
-        {
-            months = 2;
-        }
-        else if (plan == "Quarterly")
-        {
-            months = 3;
-        }
-        else if (plan == "Semiannual")
-        {
-            months = 6;
-        }
-        else
-        {
-            months = 12;
+            if (plan == "Monthly")
+            {
+                months = 1;
+            }
+            else if (plan == "Bimonthly")
+            {
+                months = 2;
+            }
+            else if (plan == "Quarterly")
+            {
+                months = 3;
+            }
+            else if (plan == "Semiannual")
+            {
+                months = 6;
+            }
+            else
+            {
+                months = 12;
+            }
+
+
         }
 
         DomainExceptionValidation.When(planPrice < 15m, "The plan value is invalid. The provided value is too low.");
@@ -124,43 +130,52 @@ public sealed class Customer
         }
 
         IsActive = isActive;
-
+        
         DomainExceptionValidation.When(lastPaymentDate > DateTime.Now, "Invalid date. The date of the last payment cannot be greater than the current date.");
         LastPaymentDate = lastPaymentDate;
 
         DomainExceptionValidation.When(string.IsNullOrEmpty(plan), "Invalid plan. The plan is required.");
         DomainExceptionValidation.When(plan != "Monthly" && plan != "Bimonthly" && plan != "Quarterly" && plan != "Semiannual" && plan != "Annual", "Invalid plan, this plan does not exist at the moment.");
         SubscriPlan = Enum.Parse<SubscriptionPlan>(plan);
-
+        Plan = plan;
 
         int months = 0;
 
-        if(plan == "Monthly")
+        if (isActive)
         {
-            months = 1;
-        }
-        else if(plan == "Bimonthly")
-        {
-            months = 2;
-        }
-        else if (plan == "Quarterly")
-        {
-            months = 3;
-        }
-        else if (plan == "Semiannual")
-        {
-            months = 6;
-        }
-        else
-        {
-            months = 12;
-        }
+            if (plan == "Monthly")
+            {
+                months = 1;
+            }
+            else if (plan == "Bimonthly")
+            {
+                months = 2;
+            }
+            else if (plan == "Quarterly")
+            {
+                months = 3;
+            }
+            else if (plan == "Semiannual")
+            {
+                months = 6;
+            }
+            else
+            {
+                months = 12;
+            }
 
+            
+        }
+        
         DomainExceptionValidation.When(planPrice < 15m, "The plan value is invalid. The provided value is too low.");
         DomainExceptionValidation.When(planPrice >= 500m, "The plan value is invalid. The provided value is too high.");
         PlanPrice = planPrice;
 
         NextPaymentDate = lastPaymentDate.AddMonths(months);
+
+        
     }
+
+    
 
 }

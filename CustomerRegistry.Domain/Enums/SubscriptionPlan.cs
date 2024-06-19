@@ -2,9 +2,9 @@
 
 public enum SubscriptionPlan
 {
-    Monthly,
-    Bimonthly,
-    Quarterly,
-    Semiannual,
-    Annual
+    Monthly = 1,
+    Bimonthly ,
+    Quarterly ,
+    Semiannual = 6,
+    Annual = 12
 }
