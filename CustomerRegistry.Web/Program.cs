@@ -11,6 +11,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
 
+//builder.Services.AddAutoMapper(typeof());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
