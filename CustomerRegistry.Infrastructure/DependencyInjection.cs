@@ -1,4 +1,7 @@
-﻿using CustomerRegistry.Domain.Interfaces;
+﻿using CustomerRegistry.Application.Interfaces;
+using CustomerRegistry.Application.Mappings;
+using CustomerRegistry.Application.Services;
+using CustomerRegistry.Domain.Interfaces;
 using CustomerRegistry.Infra.Data.Context;
 using CustomerRegistry.Infra.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +20,9 @@ public static class DependencyInjection
                          b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ICustomerService, CustomerService>();
+
+        services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
         return services;
     }

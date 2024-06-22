@@ -9,10 +9,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
-
-//builder.Services.AddAutoMapper(typeof());
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Customers}/{action=Index}/{id?}");
 
 app.Run();
