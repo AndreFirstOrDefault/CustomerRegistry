@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CustomerRegistry.Domain.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,8 @@ public class CustomerDTO
 
     [Required(ErrorMessage = "The phone number is required")]
     [DataType(DataType.PhoneNumber)]
+    [MinLength(11)]
+    [MaxLength(17)]
     [DisplayName("Phone number")]
     public string? PhoneNumber { get; set; }
 
@@ -23,7 +26,7 @@ public class CustomerDTO
     [DisplayName("Email")]
     public string? Email { get; set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
 
     [Required(ErrorMessage = "The plan is required")]
     [MinLength(6)]
@@ -33,15 +36,15 @@ public class CustomerDTO
 
     [Required(ErrorMessage = "The Plan price is required")]
     [Column(TypeName = "decimal(5,2)")]
-    [DisplayFormat(DataFormatString = "{0:C2}")]
+    [DisplayFormat(DataFormatString = "{C2}")]
     [DataType(DataType.Currency)]
     [DisplayName("Plan price")]
     public decimal PlanPrice { get; set; }
 
     [Required(ErrorMessage = "The last payment date is required")]
     [DisplayName("Last payment date")]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
     [DataType(DataType.DateTime)]
-    public DateTime LastPaymentDate { get; set; }
+    public DateTime LastPaymentDate { get; set; } 
     
 }

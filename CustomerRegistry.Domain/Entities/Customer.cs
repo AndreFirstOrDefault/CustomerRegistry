@@ -9,13 +9,14 @@ public sealed class Customer
     public int CustomerId { get; private set; }
     public string? Name { get; private set; }
     public string? PhoneNumber { get; private set; }
-    public string? Email { get; private set; } 
-    public bool IsActive { get; private set; }
+    public string? Email { get; private set; }
+    public bool IsActive { get; private set; } = true;
     public string? Plan { get; private set; }
-    public decimal PlanPrice{ get; private set; }
+    public decimal PlanPrice { get; private set; } = 30.00m;
     public SubscriptionPlan SubscriPlan { get; private set; }
-    public DateTime LastPaymentDate { get; private set; }
+    public DateTime LastPaymentDate { get; private set; } = DateTime.Now;
     public DateTime NextPaymentDate { get; private set; }
+    public List<string> ListPlans = new() { "Montlhy", "Bimonthly", "Quarterly", "Semiannual", "Annual"};
 
     public Customer(string name, string phoneNumber, string email, bool isActive, string plan, decimal planPrice,DateTime lastPaymentDate)
     {
@@ -48,7 +49,7 @@ public sealed class Customer
         Name = name;
 
         DomainExceptionValidation.When(string.IsNullOrEmpty(phoneNumber), "Invalid phone number. Phone number is required");
-        DomainExceptionValidation.When(phoneNumber.Length < 13, "Invalid phone number, too short, minimum 13 characters, ex: (XX)XXXX-XXXX");
+        DomainExceptionValidation.When(phoneNumber.Length < 11, "Invalid phone number, too short, minimum 11 characters, ex: (XX)XXXX-XXXX");
         PhoneNumber = phoneNumber;
 
         if (string.IsNullOrEmpty(email))
@@ -63,8 +64,12 @@ public sealed class Customer
 
         IsActive = isActive;
 
-        DomainExceptionValidation.When(string.IsNullOrEmpty(plan), "Invalid plan. The plan is required.");
-        DomainExceptionValidation.When(plan != "Monthly" && plan != "Bimonthly" && plan != "Quarterly" && plan != "Semiannual" && plan != "Annual", "Invalid plan, this plan does not exist at the moment.");
+        if (string.IsNullOrEmpty(Plan))
+        {
+            Plan = "Monthly";
+        }
+
+        DomainExceptionValidation.When(ListPlans.Contains(Plan), "Invalid plan, this plan does not exist at the moment.");
         SubscriPlan = Enum.Parse<SubscriptionPlan>(plan);
         Plan = plan;
 
@@ -94,6 +99,11 @@ public sealed class Customer
             }
 
 
+        }
+
+        if(PlanPrice == 0m)
+        {
+            PlanPrice = 30m;
         }
 
         DomainExceptionValidation.When(planPrice < 15m, "The plan value is invalid. The provided value is too low.");

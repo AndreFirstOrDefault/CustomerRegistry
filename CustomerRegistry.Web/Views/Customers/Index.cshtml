@@ -41,15 +41,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.IsActive)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Plan)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PlanPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastPaymentDate)
-                </th>
+               
                 
                 <th></th>
             </tr>
@@ -69,15 +61,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsActive)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Plan)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlanPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastPaymentDate)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.CustomerId" title="Edit" class="btn btn-warning">
