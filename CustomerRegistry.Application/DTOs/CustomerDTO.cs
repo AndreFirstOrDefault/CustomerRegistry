@@ -17,7 +17,7 @@ public class CustomerDTO
 
     [Required(ErrorMessage = "The phone number is required")]
     [DataType(DataType.PhoneNumber)]
-    [MinLength(11)]
+    [MinLength(10)]
     [MaxLength(17)]
     [DisplayName("Phone number")]
     public string? PhoneNumber { get; set; }

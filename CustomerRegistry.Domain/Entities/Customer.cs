@@ -54,7 +54,7 @@ public sealed class Customer
         Name = name;
 
         DomainExceptionValidation.When(string.IsNullOrEmpty(phoneNumber), "Invalid phone number. Phone number is required");
-        DomainExceptionValidation.When(phoneNumber.Length < 11, "Invalid phone number, too short, minimum 11 characters, ex: (XX)XXXX-XXXX");
+        DomainExceptionValidation.When(phoneNumber.Length < 10, "Invalid phone number, too short, minimum 10 characters, ex: (XX)XXXX-XXXX");
         PhoneNumber = phoneNumber;
 
         if (!string.IsNullOrEmpty(email))
@@ -135,7 +135,7 @@ public sealed class Customer
         Name = name;
 
         DomainExceptionValidation.When(string.IsNullOrEmpty(phoneNumber), "Invalid phone number. Phone number is required");
-        DomainExceptionValidation.When(phoneNumber.Length < 13, "Invalid phone number, too short, minimum 13 characters, ex: (XX)XXXX-XXXX");
+        DomainExceptionValidation.When(phoneNumber.Length < 10, "Invalid phone number, too short, minimum 10 characters, ex: (XX)XXXX-XXXX");
         PhoneNumber = phoneNumber;
 
         if(!string.IsNullOrEmpty(email))
