@@ -16,6 +16,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(x => x.Plan).HasMaxLength(10).IsRequired();
         builder.Property(x => x.PlanPrice).HasPrecision(5,2).IsRequired();
         builder.Property(x => x.LastPaymentDate).IsRequired();
+        builder.Property(x => x.NextPaymentDate);
 
         builder.HasData(
             new Customer(1, "Antônio", "(22)5666-7856", "antonio@gmail.com", true, "Monthly", 30m, DateTime.Now),

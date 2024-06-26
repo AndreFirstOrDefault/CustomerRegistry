@@ -1,0 +1,67 @@
+﻿@model CustomerRegistry.Application.DTOs.CustomerDTO
+
+<h3>Details Customer</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+           <fieldset disabled>
+            <input type="hidden" asp-for="CustomerId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name"  class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label"></label>
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Plan" class="control-label"></label>
+                <input asp-for="Plan" class="form-control" />
+                <span asp-validation-for="Plan" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PlanPrice" class="control-label"></label>
+                <input asp-for="PlanPrice" asp-format="{0:N2}" class="form-control" />
+                <span asp-validation-for="PlanPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastPaymentDate" class="control-label"></label>
+                <input asp-for="LastPaymentDate" class="form-control" />
+                <span asp-validation-for="LastPaymentDate" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                    <label asp-for="NextPaymentDate" class="control-label"></label>
+                    <input asp-for="NextPaymentDate" class="form-control" />
+                    <span asp-validation-for="NextPaymentDate" class="text-danger"></span>
+                </div>
+
+           
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

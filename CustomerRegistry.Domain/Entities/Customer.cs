@@ -15,12 +15,17 @@ public sealed class Customer
     public decimal PlanPrice { get; private set; } = 30.00m;
     public SubscriptionPlan SubscriPlan { get; private set; }
     public DateTime LastPaymentDate { get; private set; } = DateTime.Now;
-    public DateTime NextPaymentDate { get; private set; }
-    public List<string> ListPlans = new() { "Montlhy", "Bimonthly", "Quarterly", "Semiannual", "Annual"};
+    public DateTime NextPaymentDate { get; private set; } 
+    private List<string> ListPlans = new() { "Montlhy", "Bimonthly", "Quarterly", "Semiannual", "Annual"};
 
     public Customer(string name, string phoneNumber, string email, bool isActive, string plan, decimal planPrice,DateTime lastPaymentDate)
     {
         ValidateDomain(name, phoneNumber, email, isActive,plan, planPrice,lastPaymentDate);
+    }
+
+    public Customer()
+    {
+        
     }
 
     public void Update(string? name, string phoneNumber, string email, bool isActive, string plan,decimal planPrice, DateTime lastPaymentDate)
@@ -52,16 +57,11 @@ public sealed class Customer
         DomainExceptionValidation.When(phoneNumber.Length < 11, "Invalid phone number, too short, minimum 11 characters, ex: (XX)XXXX-XXXX");
         PhoneNumber = phoneNumber;
 
-        if (string.IsNullOrEmpty(email))
+        if (!string.IsNullOrEmpty(email))
         {
             Email = email;
         }
-        else
-        {
-            DomainExceptionValidation.When(!email.Contains("@outlook.com") && !email.Contains("@gmail.com") && !email.Contains("@yahoo.com") && !email.Contains("@hotmail.com"), "Invalid email.");
-            Email = email;
-        }
-
+        
         IsActive = isActive;
 
         if (string.IsNullOrEmpty(Plan))
@@ -114,6 +114,15 @@ public sealed class Customer
         LastPaymentDate = lastPaymentDate;
 
         NextPaymentDate = lastPaymentDate.AddMonths(months);
+
+        if(NextPaymentDate > DateTime.Now )
+        {
+            IsActive = true;
+        }
+        else
+        {
+            IsActive = false;
+        }
     }
 
     private void ValidateDomain(int id,string name, string phoneNumber, string email, bool isActive, string plan, decimal planPrice, DateTime lastPaymentDate)
@@ -183,7 +192,14 @@ public sealed class Customer
 
         NextPaymentDate = lastPaymentDate.AddMonths(months);
 
-        
+        if (NextPaymentDate > DateTime.Now)
+        {
+            IsActive = true;
+        }
+        else
+        {
+            IsActive = false;
+        }
     }
 
     

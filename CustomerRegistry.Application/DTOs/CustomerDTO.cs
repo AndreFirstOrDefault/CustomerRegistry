@@ -25,7 +25,7 @@ public class CustomerDTO
     [DataType(DataType.EmailAddress)]
     [DisplayName("Email")]
     public string? Email { get; set; }
-
+        
     public bool IsActive { get; set; } = true;
 
     [Required(ErrorMessage = "The plan is required")]
@@ -45,6 +45,11 @@ public class CustomerDTO
     [DisplayName("Last payment date")]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
     [DataType(DataType.DateTime)]
-    public DateTime LastPaymentDate { get; set; } 
-    
+    public DateTime LastPaymentDate { get; set; }
+
+    [DisplayName("Next payment date")]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+    [DataType(DataType.DateTime)]
+    public DateTime NextPaymentDate { get; }
+
 }

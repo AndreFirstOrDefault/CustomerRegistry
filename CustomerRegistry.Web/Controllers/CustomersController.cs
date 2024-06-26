@@ -20,6 +20,7 @@ public class CustomersController : Controller
         return View(customers);
     }
 
+    
     [HttpPost]
     public async Task<IActionResult> Create(CustomerDTO customerDTO)
     {
@@ -35,6 +36,80 @@ public class CustomersController : Controller
     [HttpGet]
     public IActionResult Create()
     {
+        
         return View();
+    }
+
+    [HttpGet()]
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if(id == null)
+        {
+            return NotFound();
+        }
+
+        var customerDto = await _customerService.GetById(id);
+
+        if(customerDto == null)
+        {
+            return NotFound();
+        }
+        
+        return View(customerDto);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(CustomerDTO customerDTO)
+    {
+        if (ModelState.IsValid)
+        {
+            await _customerService.Update(customerDTO);
+            return RedirectToAction(nameof(Index));
+        }
+        return View(customerDTO);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if(id == null)
+        {
+            return NotFound();
+        }
+
+        var customerDto = await _customerService.GetById(id);
+
+        if(customerDto == null)
+        {
+            return NotFound();
+        }
+
+        return View(customerDto);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        await _customerService.Remove(id);
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Details(int? id)
+    {
+        if(id == null)
+        {
+            return NotFound();
+        }
+
+        var customerDto = await _customerService.GetById(id);
+
+       
+        if(customerDto == null)
+        {
+            return NotFound();
+        }
+
+        return View(customerDto);
+
     }
 }
