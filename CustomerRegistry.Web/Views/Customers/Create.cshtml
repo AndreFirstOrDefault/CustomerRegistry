@@ -19,7 +19,7 @@
             </div>
             <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PhoneNumber" class="form-control" />
+                <input asp-for="PhoneNumber" class="form-control" id="PhoneNumber" oninput="maskPhone(event)" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <label asp-for="Email" class="col-md-2 control-label"></label>
@@ -52,3 +52,13 @@
         </div>
     </div>
 </form>
+
+<script>
+    function maskPhone(event) {
+        const input = event.target;
+        let value = input.value.replace(/\D/g, '');
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+        input.value = value;
+    }
+</script>
