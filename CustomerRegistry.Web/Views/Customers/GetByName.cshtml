@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CustomerRegistry.Application.DTOs.CustomerDTO>
 
 @{
-    ViewData["Title"] = "Laisa gostosa";
+    ViewData["Title"] = "Busca por Nome";
 }
 
 <style>
@@ -10,7 +10,7 @@
     }
 </style>
 <div>
-    <h2>@ViewData["Title"]</h2>
+    <h2>Encontrados @ViewBag.Quantidade</h2>
 </div>
 
 <div class="panel panel-default">
@@ -67,5 +67,6 @@
             }
         </tbody>
     </table>
+    <a class="btn btn-success" asp-controller="Customers" asp-action="Index">Voltar</a>
 </div>
 

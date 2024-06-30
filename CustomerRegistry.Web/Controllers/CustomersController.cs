@@ -114,16 +114,20 @@ public class CustomersController : Controller
     }
 
 
-    [HttpGet]
+    
     public async Task<IActionResult> GetByName(string name)
     {
+      
         if (string.IsNullOrEmpty(name))
         {
             return NotFound();
         }
 
         var customers = await _customerService.GetByName(name);
-        return View();
+
+        ViewBag.Quantidade = customers.Count(); // Retorna um dado com a quantidade de itens encontrados
+
+        return View("~/Views/Customers/GetByName.cshtml", customers); // Caminho da View e o objeto que será impresso
     }
         
 

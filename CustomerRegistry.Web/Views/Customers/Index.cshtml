@@ -15,9 +15,13 @@
 <hr />
 
 <form asp-action="GetByName" >
-<div class="row">
-    
-        <div class="col-lg-4">
+<div class="row">    
+        <div class"col-lg-4 mb-4">           
+           <partial name="_FormGetByName" />
+            </div>
+        </div>
+
+        <div class="mt-3 col-lg-4">
             <div>
                 <div class="pull-left">
                     <a asp-action="Create" class="btn btn-primary">
@@ -25,29 +29,11 @@
                     </a>
                 </div>
             </div>
-        </div>
-       
-        
-        <div class="col-lg-4">
-            <div class="justify-content-end">
-                <div class="input-group ">
-                    <input type="text" method="get" class="form-control" placeholder="Search by name">
-                    <div class="pull-left">
-                        <a asp-action="GetByName"  class="btn btn-secondary">
-                            <span type="Get by Name" class="fas fa-search"></span>Get by Name
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-       
-   
+        </div>      
 </div>
 </form>
 <br />
-<div class="panel panel-default">
+<div class="container panel panel-default">
     <table class="table table-striped">
         <thead>
             <tr>

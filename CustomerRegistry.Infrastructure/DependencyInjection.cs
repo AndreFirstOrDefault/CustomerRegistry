@@ -14,10 +14,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(configuration.GetConnectionString("DefaultConnection2"),
-        MySqlServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection2")),
-                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+     
+        //options.UseMySql(configuration.GetConnectionString("DefaultConnection2"),
+        //MySqlServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection2")),
+        //                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ICustomerService, CustomerService>();

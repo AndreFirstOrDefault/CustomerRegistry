@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerRegistry.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240619225500_AjusteCodigo")]
-    partial class AjusteCodigo
+    [Migration("20240630035222_MigrationSQLSERVER")]
+    partial class MigrationSQLSERVER
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace CustomerRegistry.Infra.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CustomerRegistry.Domain.Entities.Customer", b =>
                 {
@@ -31,35 +31,35 @@ namespace CustomerRegistry.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CustomerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("Email")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("LastPaymentDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("NextPaymentDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(17)
-                        .HasColumnType("varchar(17)");
+                        .HasColumnType("nvarchar(17)");
 
                     b.Property<string>("Plan")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("PlanPrice")
                         .HasPrecision(5, 2)
@@ -78,9 +78,9 @@ namespace CustomerRegistry.Infra.Data.Migrations
                             CustomerId = 1,
                             Email = "antonio@gmail.com",
                             IsActive = true,
-                            LastPaymentDate = new DateTime(2024, 6, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(3844),
+                            LastPaymentDate = new DateTime(2024, 6, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7190),
                             Name = "Antônio",
-                            NextPaymentDate = new DateTime(2024, 7, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(3844),
+                            NextPaymentDate = new DateTime(2024, 7, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7190),
                             PhoneNumber = "(22)5666-7856",
                             Plan = "Monthly",
                             PlanPrice = 30m,
@@ -91,9 +91,9 @@ namespace CustomerRegistry.Infra.Data.Migrations
                             CustomerId = 2,
                             Email = "beatriz@yahoo.com",
                             IsActive = false,
-                            LastPaymentDate = new DateTime(2024, 5, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4182),
+                            LastPaymentDate = new DateTime(2024, 5, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7313),
                             Name = "Beatriz",
-                            NextPaymentDate = new DateTime(2024, 5, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4182),
+                            NextPaymentDate = new DateTime(2024, 5, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7313),
                             PhoneNumber = "(11)9455-1234",
                             Plan = "Annual",
                             PlanPrice = 120m,
@@ -104,9 +104,9 @@ namespace CustomerRegistry.Infra.Data.Migrations
                             CustomerId = 3,
                             Email = "carlos@outlook.com",
                             IsActive = true,
-                            LastPaymentDate = new DateTime(2024, 6, 9, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4197),
+                            LastPaymentDate = new DateTime(2024, 6, 20, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7322),
                             Name = "Carlos",
-                            NextPaymentDate = new DateTime(2025, 6, 9, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4197),
+                            NextPaymentDate = new DateTime(2025, 6, 20, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7322),
                             PhoneNumber = "(21)9876-5432",
                             Plan = "Annual",
                             PlanPrice = 35m,
@@ -116,10 +116,10 @@ namespace CustomerRegistry.Infra.Data.Migrations
                         {
                             CustomerId = 4,
                             Email = "daniela@gmail.com",
-                            IsActive = true,
-                            LastPaymentDate = new DateTime(2024, 4, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4233),
+                            IsActive = false,
+                            LastPaymentDate = new DateTime(2024, 4, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7384),
                             Name = "Daniela",
-                            NextPaymentDate = new DateTime(2024, 5, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4233),
+                            NextPaymentDate = new DateTime(2024, 5, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7384),
                             PhoneNumber = "(31)9988-7766",
                             Plan = "Monthly",
                             PlanPrice = 25m,
@@ -130,9 +130,9 @@ namespace CustomerRegistry.Infra.Data.Migrations
                             CustomerId = 5,
                             Email = "eduardo@gmail.com",
                             IsActive = false,
-                            LastPaymentDate = new DateTime(2024, 3, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4240),
+                            LastPaymentDate = new DateTime(2024, 3, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7390),
                             Name = "Eduardo",
-                            NextPaymentDate = new DateTime(2024, 3, 19, 19, 55, 0, 272, DateTimeKind.Local).AddTicks(4240),
+                            NextPaymentDate = new DateTime(2024, 3, 30, 0, 52, 22, 513, DateTimeKind.Local).AddTicks(7390),
                             PhoneNumber = "(41)9234-5678",
                             Plan = "Annual",
                             PlanPrice = 150m,
