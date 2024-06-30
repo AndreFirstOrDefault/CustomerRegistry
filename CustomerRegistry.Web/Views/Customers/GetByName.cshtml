@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CustomerRegistry.Application.DTOs.CustomerDTO>
 
 @{
-    ViewData["Title"] = "Customers Management";
+    ViewData["Title"] = "Laisa gostosa";
 }
 
 <style>
@@ -12,41 +12,7 @@
 <div>
     <h2>@ViewData["Title"]</h2>
 </div>
-<hr />
 
-<form asp-action="GetByName" >
-<div class="row">
-    
-        <div class="col-lg-4">
-            <div>
-                <div class="pull-left">
-                    <a asp-action="Create" class="btn btn-primary">
-                        <span title="Register New" class="fas fa-plus"></span> Register New
-                    </a>
-                </div>
-            </div>
-        </div>
-       
-        
-        <div class="col-lg-4">
-            <div class="justify-content-end">
-                <div class="input-group ">
-                    <input type="text" method="get" class="form-control" placeholder="Search by name">
-                    <div class="pull-left">
-                        <a asp-action="GetByName"  class="btn btn-secondary">
-                            <span type="Get by Name" class="fas fa-search"></span>Get by Name
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-       
-   
-</div>
-</form>
-<br />
 <div class="panel panel-default">
     <table class="table table-striped">
         <thead>
@@ -63,8 +29,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.IsActive)
                 </th>
-               
-                
+
+
                 <th></th>
             </tr>
         </thead>
@@ -102,3 +68,4 @@
         </tbody>
     </table>
 </div>
+

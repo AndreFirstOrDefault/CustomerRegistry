@@ -113,5 +113,18 @@ public class CustomersController : Controller
 
     }
 
-    
+
+    [HttpGet]
+    public async Task<IActionResult> GetByName(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            return NotFound();
+        }
+
+        var customers = await _customerService.GetByName(name);
+        return View();
+    }
+        
+
 }
