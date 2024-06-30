@@ -25,7 +25,7 @@
             <div>
                 <div class="pull-left">
                     <a asp-action="Create" class="btn btn-primary">
-                        <span title="Register New" class="fas fa-plus"></span> Register New
+                        <span title="Register New" class="fa fa-plus"></span> Register New
                     </a>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IsActive)
+                </th>             
+                <th>
+                    Actions
                 </th>
-               
-                
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -71,16 +71,17 @@
                         @Html.DisplayFor(modelItem => item.IsActive)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.CustomerId" title="Edit" class="btn btn-warning">
-                            <span class="fas fa-edit">Edit</span>
+                        <a asp-action="Details" asp-route-id="@item.CustomerId" title="Details" class="btn btn-primary ml-2">
+                            <i class="fa-solid fa-circle-info"></i>
                         </a>
 
-                        <a asp-action="Details" asp-route-id="@item.CustomerId" title="Details" class="btn btn-primary">
-                            <span class="fas fa-search">Details</span>
+                        <a asp-action="Edit" asp-route-id="@item.CustomerId" title="Edit" class="btn btn-warning ml-2">
+                            <span class="fa fa-edit"></span>
                         </a>
 
-                        <a asp-action="Delete" asp-route-id="@item.CustomerId" title="Delete" class="btn btn-danger">
-                            <span class="fas fa-trash-alt">Delete</span>
+
+                        <a asp-action="Delete" asp-route-id="@item.CustomerId" title="Delete" class="btn btn-danger ml-2">
+                            <span class="fa fa-trash-alt"></span>
                         </a>
                     </td>
                 </tr>

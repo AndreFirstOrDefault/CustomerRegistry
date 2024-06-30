@@ -18,13 +18,14 @@ public class CustomerDTO
     [DataType(DataType.PhoneNumber)]
     [MinLength(10)]
     [MaxLength(17)]
-    [DisplayName("Phone number")]
+    [DisplayName("Phone")]
     public string? PhoneNumber { get; set; }
 
     [DataType(DataType.EmailAddress)]
     [DisplayName("Email")]
     public string? Email { get; set; }
-        
+
+    [DisplayName("Activ?")]
     public bool IsActive { get; set; } = true;
 
     [Required(ErrorMessage = "The plan is required")]
