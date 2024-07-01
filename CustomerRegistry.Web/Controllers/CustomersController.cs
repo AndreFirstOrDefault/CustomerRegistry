@@ -112,19 +112,22 @@ public class CustomersController : Controller
         return View(customerDto);
 
     }
+        
 
-
-    [HttpGet]
+    [HttpGet("GetByName")]
     public async Task<IActionResult> GetByName(string name)
     {
         if (string.IsNullOrEmpty(name))
         {
-            return NotFound();
+            return BadRequest("Name parameter is required.");
         }
 
         var customers = await _customerService.GetByName(name);
-        return View();
-    }
-        
+        if (customers == null || !customers.Any())
+        {
+            return NotFound("No customers found with the given name.");
+        }
 
+        return View(customers);
+    }
 }

@@ -14,7 +14,7 @@
 </div>
 <hr />
 
-<form asp-action="GetByName" >
+
 <div class="row">
     
         <div class="col-lg-4">
@@ -26,26 +26,25 @@
                 </div>
             </div>
         </div>
-       
-        
-        <div class="col-lg-4">
-            <div class="justify-content-end">
-                <div class="input-group ">
-                    <input type="text" method="get" class="form-control" placeholder="Search by name">
-                    <div class="pull-left">
-                        <a asp-action="GetByName"  class="btn btn-secondary">
-                            <span type="Get by Name" class="fas fa-search"></span>Get by Name
-                        </a>
 
-                    </div>
+
+    <div class="col-lg-4">
+        <form asp-action="GetByName" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="name" class="form-control" placeholder="Search by name">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">
+                        Get by Name
+                    </button>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
        
    
 </div>
-</form>
+
 <br />
 <div class="panel panel-default">
     <table class="table table-striped">
