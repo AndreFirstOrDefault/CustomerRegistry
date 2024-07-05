@@ -49,6 +49,6 @@ public class CustomerDTO
     [DisplayName("Next payment date")]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
     [DataType(DataType.DateTime)]
-    public DateTime NextPaymentDate { get; }
+    public DateTime NextPaymentDate { get; set; }
 
 }

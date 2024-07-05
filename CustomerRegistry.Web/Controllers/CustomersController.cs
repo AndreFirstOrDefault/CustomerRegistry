@@ -26,6 +26,7 @@ public class CustomersController : Controller
     {
         if(ModelState.IsValid)
         {
+            
             await _customerService.Add(customerDTO);
             return RedirectToAction(nameof(Index));
         }
@@ -36,7 +37,6 @@ public class CustomersController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        
         return View();
     }
 
@@ -108,7 +108,8 @@ public class CustomersController : Controller
         {
             return NotFound();
         }
-
+        var customer = new CustomerDTO();
+        ViewBag.Date = customer.NextPaymentDate;
         return View(customerDto);
 
     }
@@ -119,13 +120,16 @@ public class CustomersController : Controller
     {
         if (string.IsNullOrEmpty(name))
         {
-            return BadRequest("Name parameter is required.");
+            ViewBag.Message = "Name parameter is required.";
+            return View("Error");
+            
         }
 
         var customers = await _customerService.GetByName(name);
         if (customers == null || !customers.Any())
         {
-            return NotFound("No customers found with the given name.");
+            ViewBag.Message = "No customers found with the given name.";
+            return View("Error");
         }
 
         return View(customers);

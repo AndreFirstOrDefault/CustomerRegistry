@@ -10,15 +10,15 @@ public sealed class Customer
     public string? Name { get; private set; }
     public string? PhoneNumber { get; private set; }
     public string? Email { get; private set; }
-    public bool IsActive { get; private set; } = true;
+    public bool IsActive { get; private set; } 
     public string? Plan { get; private set; }
-    public decimal PlanPrice { get; private set; } = 30.00m;
+    public decimal PlanPrice { get; private set; }
     public SubscriptionPlan SubscriPlan { get; private set; }
-    public DateTime LastPaymentDate { get; private set; } = DateTime.Now;
-    public DateTime NextPaymentDate { get; private set; } 
-    private List<string> ListPlans = new() { "Montlhy", "Bimonthly", "Quarterly", "Semiannual", "Annual"};
+    public DateTime LastPaymentDate { get; private set; } 
+    public DateTime NextPaymentDate { get; private set; }  
+    public List<string> ListPlans = new() { "Montlhy", "Bimonthly", "Quarterly", "Semiannual", "Annual"};
 
-    public Customer(string name, string phoneNumber, string email, bool isActive, string plan, decimal planPrice,DateTime lastPaymentDate)
+    public Customer(string name, string phoneNumber, string email, bool isActive, string plan, decimal planPrice,DateTime lastPaymentDate )
     {
         ValidateDomain(name, phoneNumber, email, isActive,plan, planPrice,lastPaymentDate);
     }

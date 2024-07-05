@@ -34,7 +34,7 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<IEnumerable<Customer>> GetByName(string name)
     {
-        return await _customerContext.Customers.Where(c => c.Name.Contains(name)).ToListAsync();
+        return await _customerContext.Customers.Where(c => c.Name.StartsWith(name)).ToListAsync();
     }
 
     public async Task<Customer> Remove(Customer customer)
