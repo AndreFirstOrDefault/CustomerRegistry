@@ -21,7 +21,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ICustomerService, CustomerService>();
-
+        services.AddScoped<IDateService, DateService>();
         services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
         return services;

@@ -7,10 +7,12 @@ namespace CustomerRegistry.Web.Controllers;
 public class CustomersController : Controller
 {
     private readonly ICustomerService _customerService;
+    private readonly IDateService _dateService;
 
-    public CustomersController(ICustomerService customerService)
+    public CustomersController(ICustomerService customerService, IDateService dateService)
     {
         _customerService = customerService;
+        _dateService = dateService;
     }
 
     [HttpGet]
@@ -19,14 +21,13 @@ public class CustomersController : Controller
         var customers = await _customerService.GetAll();
         return View(customers);
     }
-
-    
+        
     [HttpPost]
     public async Task<IActionResult> Create(CustomerDTO customerDTO)
     {
         if(ModelState.IsValid)
         {
-            
+            customerDTO.NextPaymentDate = _dateService.nextPay(customerDTO.LastPaymentDate, customerDTO.Plan);
             await _customerService.Add(customerDTO);
             return RedirectToAction(nameof(Index));
         }
@@ -63,6 +64,7 @@ public class CustomersController : Controller
     {
         if (ModelState.IsValid)
         {
+            customerDTO.NextPaymentDate = _dateService.nextPay(customerDTO.LastPaymentDate, customerDTO.Plan);
             await _customerService.Update(customerDTO);
             return RedirectToAction(nameof(Index));
         }
@@ -113,8 +115,7 @@ public class CustomersController : Controller
         return View(customerDto);
 
     }
-        
-
+     
     [HttpGet("GetByName")]
     public async Task<IActionResult> GetByName(string name)
     {
@@ -133,5 +134,7 @@ public class CustomersController : Controller
         }
 
         return View(customers);
-    }
+    }   
+       
+    
 }
