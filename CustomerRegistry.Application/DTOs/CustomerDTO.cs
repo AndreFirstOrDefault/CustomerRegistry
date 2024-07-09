@@ -28,8 +28,7 @@ public class CustomerDTO
     public bool IsActive { get; set; } = true;
 
     [Required(ErrorMessage = "The plan is required")]
-    [MinLength(6)]
-    [MaxLength(10)]
+    [AllowedValues("Monthly", "Bimonthly", "Quarterly", "Semiannual", "Annual")]
     [DisplayName("Plan")]
     public string? Plan { get; set; }
 
