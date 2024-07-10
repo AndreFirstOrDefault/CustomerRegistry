@@ -16,9 +16,13 @@
         
     </header>
     <div class="container" style="margin-top: 25px">
+        <ul class="navbar-nav ml-auto">
+            @await Html.PartialAsync("_LoginPartial")
+        </ul>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        
     </div>
 
     

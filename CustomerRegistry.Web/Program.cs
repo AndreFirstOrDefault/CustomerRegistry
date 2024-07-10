@@ -1,13 +1,17 @@
-using CustomerRegistry.Domain.Interfaces;
-using CustomerRegistry.Infra.Data.Repositories;
+using CustomerRegistry.Domain.Account;
+using CustomerRegistry.Infra.Data.Identity;
 using CustomerRegistry.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ISeedUserRoleInitial seedUserRoleInitial;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddScoped<ISeedUserRoleInitial ,SeedUserRoleInitial> ();
 
 var app = builder.Build();
 

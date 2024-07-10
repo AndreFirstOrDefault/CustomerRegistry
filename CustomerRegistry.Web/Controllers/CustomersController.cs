@@ -1,9 +1,10 @@
 ﻿using CustomerRegistry.Application.DTOs;
 using CustomerRegistry.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerRegistry.Web.Controllers;
-
+[Authorize]
 public class CustomersController : Controller
 {
     private readonly ICustomerService _customerService;
@@ -35,12 +36,14 @@ public class CustomersController : Controller
         return View(customerDTO);
     }
 
+    [Authorize]
     [HttpGet]
     public IActionResult Create()
     {
         return View();
     }
 
+    [Authorize]
     [HttpGet()]
     public async Task<IActionResult> Edit(int? id)
     {

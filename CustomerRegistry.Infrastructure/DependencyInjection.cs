@@ -1,9 +1,12 @@
 ﻿using CustomerRegistry.Application.Interfaces;
 using CustomerRegistry.Application.Mappings;
 using CustomerRegistry.Application.Services;
+using CustomerRegistry.Domain.Account;
 using CustomerRegistry.Domain.Interfaces;
 using CustomerRegistry.Infra.Data.Context;
+using CustomerRegistry.Infra.Data.Identity;
 using CustomerRegistry.Infra.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,10 +22,20 @@ public static class DependencyInjection
         MySqlServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection2")),
                          b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
+
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IDateService, DateService>();
         services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
+        services.AddIdentity<ApplicationUser,IdentityRole>().
+                            AddEntityFrameworkStores<ApplicationDbContext>().
+                            AddDefaultTokenProviders();
+
+        services.AddScoped<IAuthenticate, AuthenticateService>();
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+        services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Account/Login");
 
         return services;
     }

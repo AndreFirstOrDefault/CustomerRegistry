@@ -10,8 +10,4 @@
     <ProjectReference Include="..\CustomerRegistry.Infrastructure\CustomerRegistry.Infra.IoC.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-  </ItemGroup>
-
 </Project>
