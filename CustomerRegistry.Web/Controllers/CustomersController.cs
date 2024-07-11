@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerRegistry.Web.Controllers;
+
 [Authorize]
 public class CustomersController : Controller
 {
@@ -22,7 +23,7 @@ public class CustomersController : Controller
         var customers = await _customerService.GetAll();
         return View(customers);
     }
-        
+
     [HttpPost]
     public async Task<IActionResult> Create(CustomerDTO customerDTO)
     {
@@ -36,14 +37,12 @@ public class CustomersController : Controller
         return View(customerDTO);
     }
 
-    [Authorize]
     [HttpGet]
     public IActionResult Create()
     {
         return View();
     }
 
-    [Authorize]
     [HttpGet()]
     public async Task<IActionResult> Edit(int? id)
     {
@@ -61,7 +60,7 @@ public class CustomersController : Controller
         
         return View(customerDto);
     }
-
+        
     [HttpPost]
     public async Task<IActionResult> Edit(CustomerDTO customerDTO)
     {
@@ -98,7 +97,7 @@ public class CustomersController : Controller
         await _customerService.Remove(id);
         return RedirectToAction("Index");
     }
-
+        
     public async Task<IActionResult> Details(int? id)
     {
         if(id == null)
@@ -118,7 +117,7 @@ public class CustomersController : Controller
         return View(customerDto);
 
     }
-     
+
     [HttpGet("GetByName")]
     public async Task<IActionResult> GetByName(string name)
     {

@@ -31,7 +31,7 @@ public class AccountController : Controller
         {
             if(string.IsNullOrEmpty(model.ReturnUrl))
             {
-                return RedirectToAction("Index", "Customer");
+                return RedirectToAction("Index", "Customers");
             }
             return Redirect(model.ReturnUrl);
         }

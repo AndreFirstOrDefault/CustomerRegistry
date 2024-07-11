@@ -7,7 +7,7 @@
 
         <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal">
 
-            <input type="hidden" asp-for="ReturnUrl" />
+            <input type="hidden" required="false" asp-for="ReturnUrl" />
 
             <div asp-validation-summary="All" class="text-danger">
             </div>
@@ -36,9 +36,12 @@
                 </div>
             </div>
 
-            <p>
-                <a asp-action="Register">Register as a new user?</a>
-            </p>
+           @*  <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" asp-action="Register" class="btn btn-outline-dark">Register as a new user?</button>
+                </div>
+            </div> *@
+
 
         </form>
     </div>

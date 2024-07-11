@@ -13,5 +13,6 @@ public class LoginViewModel
     [DataType(DataType.Password)]
     public string Password { get; set; }
 
+    
     public string ReturnUrl { get; set; }
 }
