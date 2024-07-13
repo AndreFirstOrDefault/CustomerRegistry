@@ -66,7 +66,7 @@ public class CustomersController : Controller
     {
         if (ModelState.IsValid)
         {
-            customerDTO.NextPaymentDate = _dateService.nextPay(customerDTO.LastPaymentDate, customerDTO.Plan);
+            customerDTO.NextPaymentDate = _dateService.nextPay(customerDTO.LastPaymentDate, customerDTO.Plan ?? "Monthly");
             await _customerService.Update(customerDTO);
             return RedirectToAction(nameof(Index));
         }

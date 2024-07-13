@@ -4,8 +4,6 @@ using CustomerRegistry.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
-ISeedUserRoleInitial seedUserRoleInitial;
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

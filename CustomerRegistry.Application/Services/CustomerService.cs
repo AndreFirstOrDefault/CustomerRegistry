@@ -20,7 +20,8 @@ public class CustomerService : ICustomerService
     public async Task<IEnumerable<CustomerDTO>> GetAll()
     {
         var customers = await _customerRepository.GetAll();
-        return _mapper.Map<IEnumerable<CustomerDTO>>(customers);
+        var customerOrder = customers.OrderBy(d => d.NextPaymentDate);
+        return _mapper.Map<IEnumerable<CustomerDTO>>(customerOrder);
     }
 
     public async Task<CustomerDTO> GetById(int? id)
