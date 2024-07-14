@@ -1,9 +1,11 @@
 ﻿using CustomerRegistry.Application.DTOs;
 using CustomerRegistry.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerRegistry.API.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class CustomerController : ControllerBase

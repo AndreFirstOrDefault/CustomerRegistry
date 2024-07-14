@@ -1,4 +1,5 @@
 using CustomerRegistry.Infra.IoC;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructureAPI(builder.Configuration);
+
+builder.Services.AddInfrastructureSwagger();
+
+//ativando a autenticação
+builder.Services.AddInfrastructureJWT(builder.Configuration);
 
 var app = builder.Build();
 
